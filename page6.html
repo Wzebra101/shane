@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Wonders of Space</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dream Travel Destination</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
@@ -37,15 +37,12 @@
       padding: 48px 20px 64px;
       font-family: var(--body);
       color: var(--ink);
-      background-color: var(--haori-black);
-      background-image: conic-gradient(
-        var(--haori-black) 25%,
-        var(--haori-green) 0 50%,
-        var(--haori-black) 0 75%,
-        var(--haori-green) 0
-      );
-      background-size: 96px 96px;
+      background-color: #dff6ff;
+      background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+      background-repeat: no-repeat;
       background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
     }
 
     .page {
@@ -100,31 +97,13 @@
       z-index: 1;
       font-family: var(--display);
       font-weight: 800;
-      font-size: clamp(2rem, 7.5vw, 4.4rem);
-      line-height: 1.15;
+      font-size: clamp(2.2rem, 8vw, 4.6rem);
+      line-height: 1.1;
       letter-spacing: 0.03em;
       color: var(--paper);
       text-shadow:
         3px 3px 0 var(--nichirin),
         6px 6px 0 var(--nichirin-deep);
-    }
-
-    .banner p {
-      position: relative;
-      z-index: 1;
-      margin-top: 18px;
-      font-family: var(--display);
-      font-weight: 500;
-      font-size: clamp(1rem, 2.6vw, 1.25rem);
-      letter-spacing: 0.05em;
-      color: var(--gold);
-    }
-
-    .banner p + p {
-      margin-top: 8px;
-      font-size: 1rem;
-      color: var(--paper);
-      opacity: 0.85;
     }
 
     .content {
@@ -140,7 +119,7 @@
       box-shadow: 6px 6px 0 rgba(16, 16, 16, 0.85);
     }
 
-    .card.alt {
+    .card:nth-of-type(even) {
       border-left-color: var(--haori-green);
     }
 
@@ -163,128 +142,6 @@
       font-weight: 400;
       line-height: 1.9;
       text-align: justify;
-    }
-
-    .photo-frame {
-      width: 640px;
-      max-width: 100%;
-      margin: 10px auto 44px;
-      padding: 10px;
-      background: var(--haori-black);
-      border: 2px solid var(--gold);
-      box-shadow: 8px 8px 0 var(--haori-green);
-      position: relative;
-    }
-
-    .photo-frame::before,
-    .photo-frame::after {
-      content: "";
-      position: absolute;
-      width: 34px;
-      height: 34px;
-      border: 4px solid var(--nichirin);
-    }
-
-    .photo-frame::before {
-      top: -12px;
-      left: -12px;
-      border-right: none;
-      border-bottom: none;
-    }
-
-    .photo-frame::after {
-      right: -12px;
-      bottom: -12px;
-      border-left: none;
-      border-top: none;
-    }
-
-    .photo-frame img {
-      display: block;
-      width: 100%;
-      height: 340px;
-      object-fit: cover;
-      filter: contrast(1.05) saturate(1.05);
-    }
-
-    .planet {
-      margin-bottom: 24px;
-      padding: 4px 22px 2px;
-      background: rgba(255, 255, 255, 0.45);
-      border: 1px dashed rgba(26, 21, 18, 0.5);
-      border-left: 6px solid var(--water);
-    }
-
-    .planet:nth-of-type(2) {
-      border-left-color: var(--nichirin);
-    }
-
-    .planet:nth-of-type(3) {
-      border-left-color: var(--gold);
-    }
-
-    .planet h3 {
-      margin: 16px 0 10px;
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: 1.3rem;
-      letter-spacing: 0.03em;
-      color: var(--nichirin-deep);
-    }
-
-    .card ul {
-      margin-bottom: 22px;
-      list-style: none;
-      background: rgba(255, 255, 255, 0.45);
-      border: 1px dashed rgba(26, 21, 18, 0.45);
-    }
-
-    .card li {
-      position: relative;
-      padding: 12px 20px 12px 46px;
-      font-size: 1.02rem;
-      line-height: 1.65;
-      border-bottom: 1px dashed rgba(26, 21, 18, 0.35);
-    }
-
-    .card li:nth-child(even) {
-      background: rgba(30, 91, 73, 0.1);
-    }
-
-    .card li:last-child {
-      border-bottom: none;
-    }
-
-    .card li::before {
-      content: "";
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      width: 13px;
-      height: 13px;
-      background: var(--nichirin);
-      border: 2px solid var(--haori-black);
-      transform: translateY(-50%) rotate(45deg);
-    }
-
-    .quote {
-      margin: 8px 0 38px;
-      padding: 26px 30px;
-      font-family: var(--display);
-      font-weight: 700;
-      font-size: 1.25rem;
-      line-height: 1.8;
-      font-style: italic;
-      text-align: center;
-      color: var(--paper);
-      background: var(--haori-black);
-      border: 2px solid var(--gold);
-      border-left: 10px solid var(--nichirin);
-      box-shadow: 8px 8px 0 var(--haori-green);
-    }
-
-    .quote p {
-      margin: 0;
     }
 
     .footer {
@@ -465,10 +322,6 @@
       .card p {
         text-align: left;
       }
-
-      .photo-frame img {
-        height: 220px;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -489,143 +342,136 @@
 <div class="page">
 
   <header class="banner">
-    <h1>🌌 The Wonders of Space 🌌</h1>
-    <p>Exploring the mysteries of the universe</p>
-    <p>made by Sean Kryzler V. Loredo</p>
+    <h1>My Trip to Boracay</h1>
   </header>
 
   <main class="content">
 
     <section class="card">
-      <h2>Welcome to the Universe</h2>
+      <h2>My Vacation Experience</h2>
 
       <p>
-        Space is one of the most fascinating subjects that humans
-        have ever studied. It is an enormous place filled with
-        stars, planets, galaxies, moons, asteroids, comets, and
-        many other objects that we are still discovering.
-      </p>
-
-      <p>
-        The universe is so large that it is difficult to imagine
-        its actual size. Scientists continue to use powerful
-        telescopes and spacecraft to learn more about what exists
-        beyond our planet.
-      </p>
-    </section>
-
-    <div class="photo-frame">
-      <img
-        src="https://images.unsplash.com/photo-1446776877081-d282a0f896e2"
-        alt="Earth viewed from space"
-      >
-    </div>
-
-    <section class="card alt">
-      <h2>🚀 Why Is Space Interesting?</h2>
-
-      <p>
-        Space allows us to learn more about where Earth came from
-        and how the universe works. By studying distant stars and
-        planets, scientists can understand how planets form and
-        how stars are born, live, and eventually disappear.
-      </p>
-
-      <p>
-        Space exploration has also helped humans develop new
-        technologies. Satellites are used for communication,
-        weather forecasting, navigation, and observing changes
-        on Earth.
+        One of the most memorable experiences I had was when I went
+        to Boracay with my family. I had been excited about the trip
+        because I had always wanted to see the famous beaches of
+        Boracay. When the day of our trip finally came, I was very
+        happy and excited to travel. We prepared our clothes, food,
+        and other things that we needed for our vacation.
       </p>
     </section>
 
     <section class="card">
-      <h2>🪐 Interesting Planets</h2>
+      <h2>Our Journey</h2>
 
-      <div class="planet">
-        <h3>🌍 Earth</h3>
-
-        <p>
-          Earth is the planet we call home. It is the only planet
-          currently known to support life. Earth has liquid water,
-          an atmosphere, and conditions that allow plants, animals,
-          and humans to survive.
-        </p>
-      </div>
-
-      <div class="planet">
-        <h3>🔴 Mars</h3>
-
-        <p>
-          Mars is often called the Red Planet because of its
-          reddish appearance. Scientists are interested in Mars
-          because it may have had liquid water in the distant
-          past. Several spacecraft and rovers have explored
-          its surface.
-        </p>
-      </div>
-
-      <div class="planet">
-        <h3>🪐 Saturn</h3>
-
-        <p>
-          Saturn is famous for its beautiful rings. The rings
-          are made mostly of pieces of ice and rock. Saturn is
-          one of the largest planets in our solar system and
-          has many moons.
-        </p>
-      </div>
-    </section>
-
-    <section class="card alt">
-      <h2>⭐ Amazing Space Facts</h2>
-
-      <ul>
-        <li>The Sun is a star at the center of our solar system.</li>
-        <li>There are billions of stars in our galaxy.</li>
-        <li>The Milky Way is the galaxy where our solar system is located.</li>
-        <li>Jupiter is the largest planet in our solar system.</li>
-        <li>The Moon is Earth's natural satellite.</li>
-        <li>Space is mostly a vacuum with very little matter.</li>
-        <li>Light from distant stars can take many years to reach Earth.</li>
-        <li>Scientists continue to discover new objects in space.</li>
-      </ul>
+      <p>
+        During our journey to Boracay, I enjoyed looking at the
+        different places we passed by. Although the travel took some
+        time, I did not get bored because I was excited about our
+        destination. When we finally arrived, I immediately noticed
+        how beautiful the surroundings were. The fresh air, bright
+        sky, and relaxing atmosphere made me feel that the long trip
+        was worth it.
+      </p>
     </section>
 
     <section class="card">
-      <h2>🔭 Space Exploration</h2>
+      <h2>The Beautiful Beach</h2>
 
       <p>
-        Humans have been interested in the stars for thousands of
-        years. Ancient civilizations observed the night sky and
-        created stories and calendars based on celestial objects.
-      </p>
-
-      <p>
-        In modern times, humans have developed rockets and
-        spacecraft that can travel beyond Earth's atmosphere.
-        Astronauts have visited the Moon, while robotic spacecraft
-        have traveled to different planets and even beyond our
-        solar system.
-      </p>
-
-      <p>
-        Space exploration is important because it helps us answer
-        questions about our universe. It also inspires young people
-        to study science, technology, engineering, and mathematics.
+        The beach was my favorite part of Boracay. The water was
+        clear and blue, while the sand was soft and white. I enjoyed
+        walking along the shore and looking at the beautiful scenery.
+        The sound of the waves was very relaxing, and the cool breeze
+        made the experience even better. I also took many pictures
+        because I wanted to remember the beautiful views.
       </p>
     </section>
 
-    <div class="quote">
+    <section class="card">
+      <h2>Swimming and Having Fun</h2>
+
       <p>
-        "The universe is full of mysteries waiting to be discovered."
+        One of the activities I enjoyed the most was swimming in the
+        sea. The water felt refreshing, especially because the
+        weather was warm. I spent time playing in the water and
+        enjoying the beach with my family. We laughed, talked, and
+        took pictures together. It was a simple activity, but it
+        became one of the happiest moments of our trip.
       </p>
-    </div>
+    </section>
+
+    <section class="card">
+      <h2>Watching the Sunset</h2>
+
+      <p>
+        Another unforgettable part of my trip was watching the
+        sunset. As the sun slowly went down, the sky changed into
+        different beautiful colors such as orange, yellow, pink,
+        and purple. Everyone around the beach seemed to stop and
+        enjoy the view. I sat near the shore and watched the sunset
+        while listening to the sound of the waves. It was peaceful
+        and relaxing, and I will always remember that beautiful
+        moment.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Food and Exploring</h2>
+
+      <p>
+        We also enjoyed eating different kinds of food during our
+        vacation. We tried Filipino dishes and other delicious
+        meals. Eating together with my family made the trip more
+        enjoyable. Aside from eating, we also explored different
+        places around the island. There were many interesting shops,
+        restaurants, and beautiful views that we discovered during
+        our stay.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Spending Time with My Family</h2>
+
+      <p>
+        What made the trip more special was being able to spend
+        quality time with my family. We do not always get the chance
+        to travel together, so I really appreciated every moment we
+        spent in Boracay. We talked, laughed, took pictures, and
+        enjoyed each other's company. The trip gave us many memories
+        that we can look back on in the future.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>What I Learned</h2>
+
+      <p>
+        My trip to Boracay taught me to appreciate nature and the
+        importance of spending time with the people I love. It also
+        reminded me that taking a break from our daily routines can
+        help us relax and enjoy life. Seeing the beautiful beach made
+        me appreciate how amazing nature can be, and it encouraged me
+        to take better care of the environment.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Conclusion</h2>
+
+      <p>
+        Overall, my trip to Boracay was one of the best experiences
+        I have ever had. From the beautiful beach and clear water to
+        the amazing sunset and delicious food, every part of the trip
+        was enjoyable. Most importantly, I was able to create
+        wonderful memories with my family. I hope that I can visit
+        Boracay again someday and experience its beauty once more.
+      </p>
+    </section>
 
   </main>
 
   <footer class="footer">
-    <p class="footer-text">Created for Activity 2</p>
+    <p class="footer-text">© 2024 My Trip to Boracay | My Memorable Vacation Experience 🌴🏖️</p>
 
     <div class="footer-buttons">
       <a class="btn" href="page5.html">Previous Page</a>
