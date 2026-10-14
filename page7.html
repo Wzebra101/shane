@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dream Travel Destination</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --haori-green: #1e5b49;
+      --haori-black: #101010;
+      --nichirin: #b3202a;
+      --nichirin-deep: #7d1119;
+      --paper: #f0e6d0;
+      --paper-shade: #e2d4b6;
+      --ink: #1a1512;
+      --gold: #c9a24a;
+      --water: #2a7a9b;
+      --display: "Shippori Mincho B1", "Hiragino Mincho ProN", Georgia, serif;
+      --body: "Zen Kaku Gothic New", "Noto Sans JP", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 48px 20px 64px;
+      font-family: var(--body);
+      color: var(--ink);
+      background-color: #dff6ff;
+      background-image: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 4px solid var(--haori-black);
+      outline: 2px solid var(--gold);
+      outline-offset: -12px;
+      box-shadow: 14px 14px 0 var(--nichirin-deep);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner {
+      position: relative;
+      padding: 56px 28px 52px;
+      text-align: center;
+      background: var(--haori-black);
+      color: var(--paper);
+      border-bottom: 6px solid var(--nichirin);
+      overflow: hidden;
+    }
+
+    .banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -62deg,
+          transparent 0 38px,
+          rgba(42, 122, 155, 0.16) 38px 40px
+        ),
+        radial-gradient(circle at 50% 120%, rgba(179, 32, 42, 0.55), transparent 62%);
+      pointer-events: none;
+    }
+
+    .banner::after {
+      content: "";
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: 22px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--nichirin) 20%, var(--gold) 50%, var(--nichirin) 80%, transparent);
+      transform: rotate(-2deg);
+    }
+
+    .banner h1 {
+      position: relative;
+      z-index: 1;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.2rem, 8vw, 4.6rem);
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: var(--paper);
+      text-shadow:
+        3px 3px 0 var(--nichirin),
+        6px 6px 0 var(--nichirin-deep);
+    }
+
+    .content {
+      padding: 48px 48px 24px;
+    }
+
+    .card {
+      margin-bottom: 38px;
+      padding: 28px 30px 12px;
+      background: rgba(255, 255, 255, 0.42);
+      border: 2px solid var(--haori-black);
+      border-left: 8px solid var(--nichirin);
+      box-shadow: 6px 6px 0 rgba(16, 16, 16, 0.85);
+    }
+
+    .card:nth-of-type(even) {
+      border-left-color: var(--haori-green);
+    }
+
+    .card h2 {
+      margin: -28px -30px 24px;
+      padding: 14px 24px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      letter-spacing: 0.04em;
+      color: var(--paper);
+      background: var(--haori-black);
+      border-bottom: 3px solid var(--gold);
+      text-shadow: 2px 2px 0 var(--nichirin-deep);
+    }
+
+    .card p {
+      margin-bottom: 20px;
+      font-size: 1.04rem;
+      font-weight: 400;
+      line-height: 1.9;
+      text-align: justify;
+    }
+
+    .footer {
+      padding: 32px 48px 40px;
+      text-align: center;
+      background: var(--paper-shade);
+      border-top: 4px solid var(--haori-black);
+    }
+
+    .footer-text {
+      margin-bottom: 24px;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 34px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--paper);
+      background: var(--haori-black);
+      border: 2px solid var(--haori-black);
+      box-shadow: 6px 6px 0 var(--haori-green);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn.next {
+      background: var(--nichirin);
+      box-shadow: 6px 6px 0 var(--haori-black);
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: var(--nichirin-deep);
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--haori-black);
+      outline: none;
+    }
+
+    .toc {
+      position: relative;
+      padding: 56px 48px 64px;
+      background: var(--haori-black);
+      border-top: 6px solid var(--nichirin);
+      color: var(--paper);
+      overflow: hidden;
+    }
+
+    .toc::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -62deg,
+          transparent 0 38px,
+          rgba(42, 122, 155, 0.12) 38px 40px
+        ),
+        radial-gradient(circle at 50% -20%, rgba(179, 32, 42, 0.45), transparent 60%);
+      pointer-events: none;
+    }
+
+    .toc h2 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 36px;
+      text-align: center;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(1.7rem, 5vw, 2.6rem);
+      letter-spacing: 0.05em;
+      text-shadow: 3px 3px 0 var(--nichirin-deep);
+    }
+
+    .toc-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .toc-btn {
+      --accent: var(--nichirin);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: var(--paper);
+      background: rgba(240, 230, 208, 0.06);
+      border: 2px solid var(--accent);
+      border-left-width: 10px;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .toc-btn:hover,
+    .toc-btn:focus-visible {
+      background: var(--accent);
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--paper);
+      outline: none;
+    }
+
+    .toc-kanji {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--haori-black);
+      background: var(--paper);
+      border: 2px solid var(--accent);
+    }
+
+    .toc-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .toc-text strong {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .toc-text span {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .water { --accent: #2a7a9b; }
+    .thunder { --accent: #d9a81e; }
+    .flame { --accent: #d4521a; }
+    .wind { --accent: #3a9a76; }
+    .stone { --accent: #7a7468; }
+    .mist { --accent: #7f9fc4; }
+    .sun { --accent: #b3202a; }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 24px 12px 40px;
+      }
+
+      .content,
+      .footer,
+      .toc {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .card {
+        padding: 22px 18px 8px;
+      }
+
+      .card h2 {
+        margin: -22px -18px 20px;
+        padding: 12px 18px;
+      }
+
+      .card p {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .btn,
+      .toc-btn {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header class="banner">
+    <h1>My Trip to Boracay</h1>
+  </header>
+
+  <main class="content">
+
+    <section class="card">
+      <h2>My Vacation Experience</h2>
+
+      <p>
+        One of the most memorable experiences I had was when I went
+        to Boracay with my family. I had been excited about the trip
+        because I had always wanted to see the famous beaches of
+        Boracay. When the day of our trip finally came, I was very
+        happy and excited to travel. We prepared our clothes, food,
+        and other things that we needed for our vacation.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Our Journey</h2>
+
+      <p>
+        During our journey to Boracay, I enjoyed looking at the
+        different places we passed by. Although the travel took some
+        time, I did not get bored because I was excited about our
+        destination. When we finally arrived, I immediately noticed
+        how beautiful the surroundings were. The fresh air, bright
+        sky, and relaxing atmosphere made me feel that the long trip
+        was worth it.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>The Beautiful Beach</h2>
+
+      <p>
+        The beach was my favorite part of Boracay. The water was
+        clear and blue, while the sand was soft and white. I enjoyed
+        walking along the shore and looking at the beautiful scenery.
+        The sound of the waves was very relaxing, and the cool breeze
+        made the experience even better. I also took many pictures
+        because I wanted to remember the beautiful views.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Swimming and Having Fun</h2>
+
+      <p>
+        One of the activities I enjoyed the most was swimming in the
+        sea. The water felt refreshing, especially because the
+        weather was warm. I spent time playing in the water and
+        enjoying the beach with my family. We laughed, talked, and
+        took pictures together. It was a simple activity, but it
+        became one of the happiest moments of our trip.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Watching the Sunset</h2>
+
+      <p>
+        Another unforgettable part of my trip was watching the
+        sunset. As the sun slowly went down, the sky changed into
+        different beautiful colors such as orange, yellow, pink,
+        and purple. Everyone around the beach seemed to stop and
+        enjoy the view. I sat near the shore and watched the sunset
+        while listening to the sound of the waves. It was peaceful
+        and relaxing, and I will always remember that beautiful
+        moment.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Food and Exploring</h2>
+
+      <p>
+        We also enjoyed eating different kinds of food during our
+        vacation. We tried Filipino dishes and other delicious
+        meals. Eating together with my family made the trip more
+        enjoyable. Aside from eating, we also explored different
+        places around the island. There were many interesting shops,
+        restaurants, and beautiful views that we discovered during
+        our stay.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Spending Time with My Family</h2>
+
+      <p>
+        What made the trip more special was being able to spend
+        quality time with my family. We do not always get the chance
+        to travel together, so I really appreciated every moment we
+        spent in Boracay. We talked, laughed, took pictures, and
+        enjoyed each other's company. The trip gave us many memories
+        that we can look back on in the future.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>What I Learned</h2>
+
+      <p>
+        My trip to Boracay taught me to appreciate nature and the
+        importance of spending time with the people I love. It also
+        reminded me that taking a break from our daily routines can
+        help us relax and enjoy life. Seeing the beautiful beach made
+        me appreciate how amazing nature can be, and it encouraged me
+        to take better care of the environment.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Conclusion</h2>
+
+      <p>
+        Overall, my trip to Boracay was one of the best experiences
+        I have ever had. From the beautiful beach and clear water to
+        the amazing sunset and delicious food, every part of the trip
+        was enjoyable. Most importantly, I was able to create
+        wonderful memories with my family. I hope that I can visit
+        Boracay again someday and experience its beauty once more.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer-text">© 2024 My Trip to Boracay | My Memorable Vacation Experience 🌴🏖️</p>
+
+    <div class="footer-buttons">
+      <a class="btn" href="page6.html">Previous Page</a>
+      <a class="btn next" href="page8.html">Next Page</a>
+    </div>
+  </footer>
+
+  <nav class="toc" aria-labelledby="toc-title">
+    <h2 id="toc-title">Table of Contents</h2>
+
+    <div class="toc-grid">
+      <a class="toc-btn water" href="page2.html">
+        <span class="toc-kanji">二</span>
+        <span class="toc-text"><strong>Page 2</strong><span>Water Breathing</span></span>
+      </a>
+      <a class="toc-btn thunder" href="page3.html">
+        <span class="toc-kanji">三</span>
+        <span class="toc-text"><strong>Page 3</strong><span>Thunder Breathing</span></span>
+      </a>
+      <a class="toc-btn flame" href="page4.html">
+        <span class="toc-kanji">四</span>
+        <span class="toc-text"><strong>Page 4</strong><span>Flame Breathing</span></span>
+      </a>
+      <a class="toc-btn wind" href="page5.html">
+        <span class="toc-kanji">五</span>
+        <span class="toc-text"><strong>Page 5</strong><span>Wind Breathing</span></span>
+      </a>
+      <a class="toc-btn stone" href="page6.html">
+        <span class="toc-kanji">六</span>
+        <span class="toc-text"><strong>Page 6</strong><span>Stone Breathing</span></span>
+      </a>
+      <a class="toc-btn mist" href="page7.html">
+        <span class="toc-kanji">七</span>
+        <span class="toc-text"><strong>Page 7</strong><span>Mist Breathing</span></span>
+      </a>
+      <a class="toc-btn sun" href="page8.html">
+        <span class="toc-kanji">八</span>
+        <span class="toc-text"><strong>Page 8</strong><span>Sun Breathing</span></span>
+      </a>
+    </div>
+  </nav>
+
+</div>
+
+</body>
+</html>
