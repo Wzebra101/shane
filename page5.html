@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billiards - History, Rules, and Techniques</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --haori-green: #1e5b49;
+      --haori-black: #101010;
+      --nichirin: #b3202a;
+      --nichirin-deep: #7d1119;
+      --paper: #f0e6d0;
+      --paper-shade: #e2d4b6;
+      --ink: #1a1512;
+      --gold: #c9a24a;
+      --water: #2a7a9b;
+      --display: "Shippori Mincho B1", "Hiragino Mincho ProN", Georgia, serif;
+      --body: "Zen Kaku Gothic New", "Noto Sans JP", "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 48px 20px 64px;
+      font-family: var(--body);
+      color: var(--ink);
+      background-color: var(--haori-black);
+      background-image: conic-gradient(
+        var(--haori-black) 25%,
+        var(--haori-green) 0 50%,
+        var(--haori-black) 0 75%,
+        var(--haori-green) 0
+      );
+      background-size: 96px 96px;
+      background-attachment: fixed;
+    }
+
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 4px solid var(--haori-black);
+      outline: 2px solid var(--gold);
+      outline-offset: -12px;
+      box-shadow: 14px 14px 0 var(--nichirin-deep);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner {
+      position: relative;
+      padding: 56px 28px 52px;
+      text-align: center;
+      background: var(--haori-black);
+      color: var(--paper);
+      border-bottom: 6px solid var(--nichirin);
+      overflow: hidden;
+    }
+
+    .banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -62deg,
+          transparent 0 38px,
+          rgba(42, 122, 155, 0.16) 38px 40px
+        ),
+        radial-gradient(circle at 50% 120%, rgba(179, 32, 42, 0.55), transparent 62%);
+      pointer-events: none;
+    }
+
+    .banner::after {
+      content: "";
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: 22px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--nichirin) 20%, var(--gold) 50%, var(--nichirin) 80%, transparent);
+      transform: rotate(-2deg);
+    }
+
+    .banner h1 {
+      position: relative;
+      z-index: 1;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.6rem, 9vw, 5.4rem);
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      color: var(--paper);
+      text-shadow:
+        3px 3px 0 var(--nichirin),
+        6px 6px 0 var(--nichirin-deep);
+    }
+
+    .banner p {
+      position: relative;
+      z-index: 1;
+      margin-top: 22px;
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(1rem, 2.6vw, 1.3rem);
+      letter-spacing: 0.06em;
+      color: var(--gold);
+    }
+
+    .content {
+      padding: 48px 48px 24px;
+    }
+
+    .card {
+      margin-bottom: 38px;
+      padding: 28px 30px 12px;
+      background: rgba(255, 255, 255, 0.42);
+      border: 2px solid var(--haori-black);
+      border-left: 8px solid var(--nichirin);
+      box-shadow: 6px 6px 0 rgba(16, 16, 16, 0.85);
+    }
+
+    .card:nth-of-type(even) {
+      border-left-color: var(--haori-green);
+    }
+
+    .card h2 {
+      margin: -28px -30px 24px;
+      padding: 14px 24px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      letter-spacing: 0.04em;
+      color: var(--paper);
+      background: var(--haori-black);
+      border-bottom: 3px solid var(--gold);
+      text-shadow: 2px 2px 0 var(--nichirin-deep);
+    }
+
+    .card h3 {
+      margin: 26px 0 10px;
+      padding-left: 30px;
+      position: relative;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
+      color: var(--nichirin-deep);
+    }
+
+    .card h3::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      background: var(--nichirin);
+      border: 2px solid var(--haori-black);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .card p {
+      margin-bottom: 20px;
+      font-size: 1.04rem;
+      font-weight: 400;
+      line-height: 1.9;
+      text-align: justify;
+    }
+
+    .card strong {
+      font-family: var(--display);
+      font-weight: 800;
+      color: var(--nichirin-deep);
+    }
+
+    .card ul {
+      margin-bottom: 22px;
+      list-style: none;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px dashed rgba(26, 21, 18, 0.45);
+    }
+
+    .card li {
+      position: relative;
+      padding: 12px 20px 12px 46px;
+      font-size: 1.02rem;
+      line-height: 1.65;
+      border-bottom: 1px dashed rgba(26, 21, 18, 0.35);
+    }
+
+    .card li:nth-child(even) {
+      background: rgba(30, 91, 73, 0.1);
+    }
+
+    .card li:last-child {
+      border-bottom: none;
+    }
+
+    .card li::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      width: 13px;
+      height: 13px;
+      background: var(--nichirin);
+      border: 2px solid var(--haori-black);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .footer {
+      padding: 32px 48px 40px;
+      text-align: center;
+      background: var(--paper-shade);
+      border-top: 4px solid var(--haori-black);
+    }
+
+    .footer-text {
+      margin-bottom: 24px;
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 34px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--paper);
+      background: var(--haori-black);
+      border: 2px solid var(--haori-black);
+      box-shadow: 6px 6px 0 var(--haori-green);
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn.next {
+      background: var(--nichirin);
+      box-shadow: 6px 6px 0 var(--haori-black);
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background: var(--nichirin-deep);
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--haori-black);
+      outline: none;
+    }
+
+    .toc {
+      position: relative;
+      padding: 56px 48px 64px;
+      background: var(--haori-black);
+      border-top: 6px solid var(--nichirin);
+      color: var(--paper);
+      overflow: hidden;
+    }
+
+    .toc::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -62deg,
+          transparent 0 38px,
+          rgba(42, 122, 155, 0.12) 38px 40px
+        ),
+        radial-gradient(circle at 50% -20%, rgba(179, 32, 42, 0.45), transparent 60%);
+      pointer-events: none;
+    }
+
+    .toc h2 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 36px;
+      text-align: center;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(1.7rem, 5vw, 2.6rem);
+      letter-spacing: 0.05em;
+      text-shadow: 3px 3px 0 var(--nichirin-deep);
+    }
+
+    .toc-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .toc-btn {
+      --accent: var(--nichirin);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: var(--paper);
+      background: rgba(240, 230, 208, 0.06);
+      border: 2px solid var(--accent);
+      border-left-width: 10px;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .toc-btn:hover,
+    .toc-btn:focus-visible {
+      background: var(--accent);
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--paper);
+      outline: none;
+    }
+
+    .toc-kanji {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--haori-black);
+      background: var(--paper);
+      border: 2px solid var(--accent);
+    }
+
+    .toc-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .toc-text strong {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .toc-text span {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .water { --accent: #2a7a9b; }
+    .thunder { --accent: #d9a81e; }
+    .flame { --accent: #d4521a; }
+    .wind { --accent: #3a9a76; }
+    .stone { --accent: #7a7468; }
+    .mist { --accent: #7f9fc4; }
+    .sun { --accent: #b3202a; }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 24px 12px 40px;
+      }
+
+      .content,
+      .footer,
+      .toc {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .card {
+        padding: 22px 18px 8px;
+      }
+
+      .card h2 {
+        margin: -22px -18px 20px;
+        padding: 12px 18px;
+      }
+
+      .card p {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .btn,
+      .toc-btn {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header class="banner">
+    <h1>🎱 Billiards</h1>
+    <p>History, Types, Equipment, Rules, and Techniques</p>
+  </header>
+
+  <main class="content">
+
+    <section class="card">
+      <h2>Introduction to Billiards</h2>
+
+      <p>
+        Billiards is a group of cue sports that are played on a
+        rectangular table covered with cloth. Players use a cue stick
+        to strike balls and control their movement across the table.
+        Depending on the type of billiards, the objective may involve
+        pocketing balls, hitting specific balls in a particular order,
+        or scoring points through precise shots.
+      </p>
+
+      <p>
+        Billiards is known for requiring a combination of physical
+        coordination and mental concentration. Although the basic
+        action of hitting a ball may appear simple, becoming skilled
+        requires practice, patience, accuracy, and an understanding
+        of angles and ball movement.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>History of Billiards</h2>
+
+      <p>
+        The history of billiards can be traced back several
+        centuries. Early forms of the game developed from outdoor
+        lawn games that were eventually brought indoors. Players
+        began using tables covered with green cloth to imitate
+        grass.
+      </p>
+
+      <p>
+        During the 17th and 18th centuries, billiards became
+        increasingly popular in Europe. Improvements were made to
+        the design of billiard tables, cues, balls, and other
+        equipment. The game eventually spread to other parts of
+        the world.
+      </p>
+
+      <p>
+        Over time, different versions of billiards developed.
+        Pool, snooker, and carom billiards became some of the most
+        recognized forms. Today, billiards is played both
+        recreationally and competitively in many countries.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Types of Billiards</h2>
+
+      <p>
+        Billiards includes several different cue sports. Each type
+        has its own table design, equipment, rules, and scoring
+        system.
+      </p>
+
+      <h3>1. Pool</h3>
+
+      <p>
+        Pool is one of the most popular forms of billiards.
+        Pool tables have six pockets, and players generally try
+        to pocket specific balls according to the rules of the
+        particular game.
+      </p>
+
+      <h3>2. Eight-Ball</h3>
+
+      <p>
+        Eight-ball is a popular pool game played with fifteen
+        object balls and one cue ball. Players are normally
+        assigned either solid-colored or striped balls. After
+        clearing their group, they attempt to legally pocket
+        the eight-ball.
+      </p>
+
+      <h3>3. Nine-Ball</h3>
+
+      <p>
+        Nine-ball uses nine numbered object balls. Players must
+        generally strike the lowest-numbered ball on the table
+        first, while the goal is to legally pocket the nine-ball.
+        The game is known for its fast pace and strategic play.
+      </p>
+
+      <h3>4. Snooker</h3>
+
+      <p>
+        Snooker is played on a larger table with smaller pockets
+        and uses a different set of balls. Players score points
+        by potting red balls and colored balls in a specific
+        sequence. Snooker requires careful positioning and
+        long-distance accuracy.
+      </p>
+
+      <h3>5. Carom Billiards</h3>
+
+      <p>
+        Carom billiards is played on a table without pockets.
+        Instead of pocketing balls, players score by making the
+        cue ball contact the other balls according to the rules
+        of the game.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Billiards Equipment</h2>
+
+      <p>
+        Proper equipment is important for playing billiards.
+        Each piece serves a specific purpose and can affect a
+        player's performance.
+      </p>
+
+      <h3>Billiard Table</h3>
+
+      <p>
+        The billiard table is the main playing surface. It is
+        usually covered with a smooth cloth that allows the balls
+        to roll consistently. Pool tables have six pockets, while
+        other forms of billiards may use different table designs.
+      </p>
+
+      <h3>Cue Stick</h3>
+
+      <p>
+        A cue stick is used to strike the cue ball. Players use
+        different parts of the cue and adjust their grip and
+        stance to control the power and direction of their shots.
+      </p>
+
+      <h3>Billiard Balls</h3>
+
+      <p>
+        Billiard balls are made from durable materials and are
+        designed to roll smoothly across the table. Different
+        games use different numbers, colors, and types of balls.
+      </p>
+
+      <h3>Chalk</h3>
+
+      <p>
+        Cue chalk is applied to the tip of the cue stick. It helps
+        increase friction between the cue tip and the cue ball,
+        reducing the chance of the cue slipping during a shot.
+      </p>
+
+      <h3>Triangle Rack</h3>
+
+      <p>
+        A rack is used to arrange the object balls before the
+        beginning of a game. Different games may require different
+        rack shapes and ball arrangements.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Basic Rules of Billiards</h2>
+
+      <p>
+        The rules of billiards depend on the specific game being
+        played. However, many versions follow some basic principles.
+        Players must use the cue stick to strike the cue ball and
+        attempt to make legal contact with the object balls.
+      </p>
+
+      <ul>
+        <li>Players should follow the rules of the specific billiards game.</li>
+        <li>The cue ball is used to strike the object balls.</li>
+        <li>Players must avoid illegal shots and fouls.</li>
+        <li>The order of play is determined by the rules of the game.</li>
+        <li>A player may continue their turn after making a legal scoring shot, depending on the game.</li>
+        <li>The winner is determined according to the scoring system of the particular game.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Important Billiards Techniques</h2>
+
+      <h3>Proper Stance</h3>
+
+      <p>
+        A stable stance helps players maintain balance while taking
+        a shot. The player's body should remain comfortable and
+        steady while the cue moves smoothly forward and backward.
+      </p>
+
+      <h3>Aiming</h3>
+
+      <p>
+        Aiming is one of the most important skills in billiards.
+        Players must consider the position of the cue ball, the
+        object ball, the pocket, and the angle required to make
+        the shot.
+      </p>
+
+      <h3>Follow Shot</h3>
+
+      <p>
+        A follow shot is performed when the cue ball continues moving
+        forward after contacting the object ball. This technique can
+        be useful for controlling the cue ball's position for the
+        next shot.
+      </p>
+
+      <h3>Draw Shot</h3>
+
+      <p>
+        A draw shot involves striking below the center of the cue
+        ball. When performed correctly, the cue ball can move
+        backward after contacting the object ball.
+      </p>
+
+      <h3>Bank Shot</h3>
+
+      <p>
+        A bank shot uses one or more cushions of the table to change
+        the direction of the ball. Players must understand angles
+        and rebound patterns to perform this type of shot accurately.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Skills Needed in Billiards</h2>
+
+      <p>
+        Successful billiards players develop several important skills.
+        These skills improve through regular practice and experience.
+      </p>
+
+      <ul>
+        <li><strong>Accuracy:</strong> The ability to aim and strike the cue ball correctly.</li>
+        <li><strong>Concentration:</strong> Maintaining focus before and during each shot.</li>
+        <li><strong>Strategy:</strong> Planning shots and thinking several moves ahead.</li>
+        <li><strong>Patience:</strong> Taking enough time to evaluate difficult situations.</li>
+        <li><strong>Ball Control:</strong> Controlling the speed and direction of the cue ball.</li>
+        <li><strong>Consistency:</strong> Repeating successful techniques accurately.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Benefits of Playing Billiards</h2>
+
+      <p>
+        Billiards can provide several recreational and mental benefits.
+        Because the sport requires players to analyze the table and
+        plan their shots, it can help develop concentration and
+        strategic thinking.
+      </p>
+
+      <p>
+        Playing billiards can also improve hand-eye coordination.
+        Players must carefully coordinate their eyes, hands, body
+        position, and cue movement to perform accurate shots.
+      </p>
+
+      <p>
+        In addition, billiards can be a social activity. It is often
+        played with friends, family members, or other players in
+        recreational and competitive environments.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Billiards as a Competitive Sport</h2>
+
+      <p>
+        Billiards is played at both amateur and professional levels.
+        Competitive players participate in local tournaments,
+        national events, and international competitions. Professional
+        tournaments can attract skilled players from different
+        countries.
+      </p>
+
+      <p>
+        Competitive billiards requires more than simply being able
+        to pocket balls. Players must understand position play,
+        defensive strategies, pressure management, table conditions,
+        and match strategy.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Conclusion</h2>
+
+      <p>
+        Billiards is a diverse group of cue sports that combines
+        accuracy, strategy, concentration, and physical coordination.
+        From pool and snooker to carom billiards, each variation
+        offers a unique style of play and different challenges.
+      </p>
+
+      <p>
+        Whether played casually with friends or competitively in
+        tournaments, billiards continues to be a popular sport around
+        the world. Learning its history, equipment, rules, and
+        techniques provides a better understanding of why billiards
+        requires both skill and careful planning.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer-text">Activity 1: CSS Selector</p>
+
+    <div class="footer-buttons">
+      <a class="btn" href="index.html">Back to Index</a>
+      <a class="btn next" href="page6.html">Next Page</a>
+    </div>
+  </footer>
+
+  <nav class="toc" aria-labelledby="toc-title">
+    <h2 id="toc-title">Table of Contents</h2>
+
+    <div class="toc-grid">
+      <a class="toc-btn water" href="page2.html">
+        <span class="toc-kanji">二</span>
+        <span class="toc-text"><strong>Page 2</strong><span>Water Breathing</span></span>
+      </a>
+      <a class="toc-btn thunder" href="page3.html">
+        <span class="toc-kanji">三</span>
+        <span class="toc-text"><strong>Page 3</strong><span>Thunder Breathing</span></span>
+      </a>
+      <a class="toc-btn flame" href="page4.html">
+        <span class="toc-kanji">四</span>
+        <span class="toc-text"><strong>Page 4</strong><span>Flame Breathing</span></span>
+      </a>
+      <a class="toc-btn wind" href="page5.html">
+        <span class="toc-kanji">五</span>
+        <span class="toc-text"><strong>Page 5</strong><span>Wind Breathing</span></span>
+      </a>
+      <a class="toc-btn stone" href="page6.html">
+        <span class="toc-kanji">六</span>
+        <span class="toc-text"><strong>Page 6</strong><span>Stone Breathing</span></span>
+      </a>
+      <a class="toc-btn mist" href="page7.html">
+        <span class="toc-kanji">七</span>
+        <span class="toc-text"><strong>Page 7</strong><span>Mist Breathing</span></span>
+      </a>
+      <a class="toc-btn sun" href="page8.html">
+        <span class="toc-kanji">八</span>
+        <span class="toc-text"><strong>Page 8</strong><span>Sun Breathing</span></span>
+      </a>
+    </div>
+  </nav>
+
+</div>
+
+</body>
+</html>
