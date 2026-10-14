@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Info</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --haori-green: #1e5b49;
+      --haori-black: #101010;
+      --nichirin: #b3202a;
+      --nichirin-deep: #7d1119;
+      --paper: #f0e6d0;
+      --paper-shade: #e2d4b6;
+      --ink: #1a1512;
+      --gold: #c9a24a;
+      --water: #2a7a9b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 48px 20px 64px;
+      font-family: "Noto Sans JP", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background-color: var(--haori-black);
+      background-image: conic-gradient(
+        var(--haori-black) 25%,
+        var(--haori-green) 0 50%,
+        var(--haori-black) 0 75%,
+        var(--haori-green) 0
+      );
+      background-size: 96px 96px;
+      background-attachment: fixed;
+    }
+
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 4px solid var(--haori-black);
+      outline: 2px solid var(--gold);
+      outline-offset: -12px;
+      box-shadow: 14px 14px 0 var(--nichirin-deep);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner {
+      position: relative;
+      padding: 56px 28px 48px;
+      text-align: center;
+      background: var(--haori-black);
+      color: var(--paper);
+      border-bottom: 6px solid var(--nichirin);
+      overflow: hidden;
+    }
+
+    .banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -62deg,
+          transparent 0 38px,
+          rgba(42, 122, 155, 0.16) 38px 40px
+        ),
+        radial-gradient(circle at 50% 120%, rgba(179, 32, 42, 0.55), transparent 62%);
+      pointer-events: none;
+    }
+
+    .banner::after {
+      content: "";
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: 22px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--nichirin) 20%, var(--gold) 50%, var(--nichirin) 80%, transparent);
+      transform: rotate(-2deg);
+    }
+
+    .banner h1 {
+      position: relative;
+      z-index: 1;
+      font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 8.5vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      color: var(--paper);
+      text-shadow:
+        3px 3px 0 var(--nichirin),
+        6px 6px 0 var(--nichirin-deep);
+    }
+
+    .profile {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 56px 48px 24px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .photo-frame {
+      flex: 0 0 auto;
+      width: 230px;
+      height: 270px;
+      padding: 8px;
+      background: var(--haori-black);
+      border: 2px solid var(--gold);
+      box-shadow: 8px 8px 0 var(--haori-green);
+      position: relative;
+    }
+
+    .photo-frame::before,
+    .photo-frame::after {
+      content: "";
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      border: 4px solid var(--nichirin);
+    }
+
+    .photo-frame::before {
+      top: -12px;
+      left: -12px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .photo-frame::after {
+      right: -12px;
+      bottom: -12px;
+      border-left: none;
+      border-top: none;
+    }
+
+    .photo-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.05) saturate(1.05);
+    }
+
+    .details {
+      flex: 1 1 340px;
+      min-width: 0;
+      max-width: 520px;
+      border-left: 5px solid var(--nichirin);
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    .details p {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 14px;
+      padding: 12px 18px;
+      font-size: 1.02rem;
+      font-weight: 500;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+      border-bottom: 1px dashed rgba(26, 21, 18, 0.35);
+    }
+
+    .details p:nth-child(even) {
+      background: rgba(30, 91, 73, 0.1);
+    }
+
+    .details p:last-child {
+      border-bottom: none;
+    }
+
+    .details strong {
+      flex: 0 0 150px;
+      font-family: "Shippori Mincho B1", Georgia, serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--nichirin-deep);
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding: 28px 48px 56px;
+      justify-content: center;
+    }
+
+    .links p {
+      flex: 1 1 280px;
+      max-width: 420px;
+      padding: 18px 20px;
+      background: var(--paper-shade);
+      border: 2px solid var(--haori-black);
+      border-top: 6px solid var(--water);
+      font-weight: 700;
+      font-family: "Shippori Mincho B1", Georgia, serif;
+      color: var(--haori-black);
+    }
+
+    .links p:nth-of-type(2) {
+      border-top-color: var(--nichirin);
+    }
+
+    .links a,
+    .next {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 16px;
+      font-family: "Noto Sans JP", "Segoe UI", sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--paper);
+      background: var(--haori-black);
+      border: 2px solid var(--haori-black);
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .links a:hover,
+    .links a:focus-visible,
+    .next:hover,
+    .next:focus-visible {
+      background: var(--nichirin);
+      border-color: var(--nichirin-deep);
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0 var(--nichirin-deep);
+      outline: none;
+    }
+
+    .next-wrap {
+      padding: 0 48px 56px;
+      text-align: center;
+    }
+
+    .next {
+      margin-top: 0;
+      padding: 14px 36px;
+      font-family: "Shippori Mincho B1", Georgia, serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+      background: var(--nichirin);
+      border-color: var(--haori-black);
+      box-shadow: 6px 6px 0 var(--haori-black);
+    }
+
+    .next:hover,
+    .next:focus-visible {
+      background: var(--haori-green);
+      border-color: var(--haori-black);
+      box-shadow: 8px 8px 0 var(--haori-black);
+      transform: translate(-2px, -2px);
+    }
+
+    .toc {
+      position: relative;
+      padding: 56px 48px 64px;
+      background: var(--haori-black);
+      border-top: 6px solid var(--nichirin);
+      color: var(--paper);
+      overflow: hidden;
+    }
+
+    .toc::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          -62deg,
+          transparent 0 38px,
+          rgba(42, 122, 155, 0.12) 38px 40px
+        ),
+        radial-gradient(circle at 50% -20%, rgba(179, 32, 42, 0.45), transparent 60%);
+      pointer-events: none;
+    }
+
+    .toc h2 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 36px;
+      text-align: center;
+      font-family: "Shippori Mincho B1", "Hiragino Mincho ProN", Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(1.7rem, 5vw, 2.6rem);
+      letter-spacing: 0.05em;
+      text-shadow: 3px 3px 0 var(--nichirin-deep);
+    }
+
+    .toc-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .toc-btn {
+      --accent: var(--nichirin);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: var(--paper);
+      background: rgba(240, 230, 208, 0.06);
+      border: 2px solid var(--accent);
+      border-left-width: 10px;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .toc-btn:hover,
+    .toc-btn:focus-visible {
+      background: var(--accent);
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--paper);
+      outline: none;
+    }
+
+    .toc-kanji {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      font-family: "Shippori Mincho B1", Georgia, serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--haori-black);
+      background: var(--paper);
+      border: 2px solid var(--accent);
+    }
+
+    .toc-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .toc-text strong {
+      font-family: "Shippori Mincho B1", Georgia, serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .toc-text span {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .water { --accent: #2a7a9b; }
+    .thunder { --accent: #d9a81e; }
+    .flame { --accent: #d4521a; }
+    .wind { --accent: #3a9a76; }
+    .stone { --accent: #7a7468; }
+    .mist { --accent: #7f9fc4; }
+    .sun { --accent: #b3202a; }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 24px 12px 40px;
+      }
+
+      .profile,
+      .links,
+      .next-wrap,
+      .toc {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .profile {
+        padding-top: 40px;
+        gap: 32px;
+      }
+
+      .details strong {
+        flex-basis: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .links a,
+      .next,
+      .toc-btn {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<main class="page">
+
+  <header class="banner">
+    <h1>STUDENT INFORMATION</h1>
+  </header>
+
+  <section class="profile">
+
+    <div class="photo-frame">
+      <img src="photo.jpg" alt="Image">
+    </div>
+
+    <div class="details">
+      <p><strong>Name:</strong> Sean Kryzler V. Loredo</p>
+      <p><strong>Grade & Section:</strong> 9 - Galatians</p>
+      <p><strong>Student ID:</strong>LOR3076-24</p>
+      <p><strong>Age:</strong>14</p>
+      <p><strong>Gender:</strong>Male</p>
+      <p><strong>Birthday:</strong>August 27, 2011</p>
+      <p><strong>Address:</strong> Justineville, Real 2, Bacoor, Cavite</p>
+      <p><strong>Contact No.:</strong> 09264707196</p>
+      <p><strong>Email:</strong>seankryzlerloredo@gmail.com</p>
+    </div>
+
+  </section>
+
+  <section class="links">
+    <p>Google: <br><a href="https://www.google.com" title="ngungel">pagpinindot mo to magkakapera ka</a></p>
+    <p>VCMC Portal: <br><a href="http://vcmc.eulap.co:8080/cbs/a/login" title="VCMC portal">pag eto naman pinindot mo magkaka aerox ka</a></p>
+  </section>
+
+  <div class="next-wrap">
+    <a class="next" href="https://github.com/Wzebra101/shawn/blob/main/nutri.html">next page</a>
+  </div>
+
+  <nav class="toc" aria-labelledby="toc-title">
+    <h2 id="toc-title">Table of Contents</h2>
+
+    <div class="toc-grid">
+      <a class="toc-btn water" href="page2.html">
+        <span class="toc-kanji">二</span>
+        <span class="toc-text"><strong>Page 2</strong><span>Water Breathing</span></span>
+      </a>
+      <a class="toc-btn thunder" href="page3.html">
+        <span class="toc-kanji">三</span>
+        <span class="toc-text"><strong>Page 3</strong><span>Thunder Breathing</span></span>
+      </a>
+      <a class="toc-btn flame" href="page4.html">
+        <span class="toc-kanji">四</span>
+        <span class="toc-text"><strong>Page 4</strong><span>Flame Breathing</span></span>
+      </a>
+      <a class="toc-btn wind" href="page5.html">
+        <span class="toc-kanji">五</span>
+        <span class="toc-text"><strong>Page 5</strong><span>Wind Breathing</span></span>
+      </a>
+      <a class="toc-btn stone" href="page6.html">
+        <span class="toc-kanji">六</span>
+        <span class="toc-text"><strong>Page 6</strong><span>Stone Breathing</span></span>
+      </a>
+      <a class="toc-btn mist" href="page7.html">
+        <span class="toc-kanji">七</span>
+        <span class="toc-text"><strong>Page 7</strong><span>Mist Breathing</span></span>
+      </a>
+      <a class="toc-btn sun" href="page8.html">
+        <span class="toc-kanji">八</span>
+        <span class="toc-text"><strong>Page 8</strong><span>Sun Breathing</span></span>
+      </a>
+    </div>
+  </nav>
+
+</main>
+
+</body>
+</html>
